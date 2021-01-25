@@ -1,0 +1,10 @@
+{% block content%}
+<form method="POST">
+    {% csrf_token  %}
+<h1>{{object.user}}</h1>
+<h1>{{object.title}}</h1>
+<h1>{{object.content}}</h1>
+<h1>{{object.created}}</h1>
+<h1>{{object.publish}}</h1>
+</form>
+{% endblock %}

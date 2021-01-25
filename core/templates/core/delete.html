@@ -1,0 +1,7 @@
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <h5>Would you like to delete this object.</h5>
+    <button type="submit">Delete</button>
+</form>
+{% endblock %}
