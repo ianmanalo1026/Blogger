@@ -6,5 +6,7 @@
 <h1>{{object.content}}</h1>
 <h1>{{object.created}}</h1>
 <h1>{{object.publish}}</h1>
+<a href="{% url 'core:delete' object.pk %}"><h1>Delete?</h1></a>
+<a href="{% url 'core:update' object.pk %}"><h1>Update?</h1></a>
 </form>
 {% endblock %}

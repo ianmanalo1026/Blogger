@@ -1,6 +1,6 @@
 {% for item in object_list%}
+<a href="{% url 'core:detail' item.pk %}"><h1>{{item.title}}</h1></a>
 <h1>{{item.user}}</h1>
-<h1>{{item.title}}</h1>
 <h1>{{item.content}}</h1>
 <h1>{{item.created}}</h1>
 {% endfor%}
