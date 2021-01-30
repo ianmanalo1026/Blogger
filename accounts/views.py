@@ -18,13 +18,24 @@ class CreateUserView(CreateView):
 
 class SignInUserView(FormView):
     form_class = UserSigninForm
-    success_url = "/"
     template_name = "accounts/signin.html"
     
-    def form_valid(self, form):
-        return super().form_valid(form)
-        
+    def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+
+                return render(request, 'core/home.html')
+
     
+        def form_valid(self, form):
+            return super().form_valid(form)
+            
+        
     
 class SignOutView(TemplateView):
     template_name = "accounts/signout.html"

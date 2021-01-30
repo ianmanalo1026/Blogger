@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'core',
+    'widget_tweaks',
     'accounts.apps.AccountsConfig',
 ]
 
@@ -121,3 +122,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = '/'

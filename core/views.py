@@ -25,9 +25,9 @@ class UserListView(ListView):
     model = Post
     template_name = "core/user.html"
     
-        def get_queryset(self):
+    def get_queryset(self):
         return Post.objects.filter(publish=True)
-    
+
     
 class CreatePostView(CreateView):
     

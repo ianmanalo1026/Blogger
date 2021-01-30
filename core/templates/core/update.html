@@ -1,7 +1,14 @@
+{% extends 'core/base.html' %}
 {% block content%}
-<form method="POST">
-{% csrf_token %}
-{{ form.as_p}}
-<button type="submit">Submit</button>
-</form>
+<div class="container pt-5">
+    <div class="form-control">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button type="submit" class="btn btn-success">Done</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
+
+

@@ -1,12 +1,23 @@
+{% extends 'core/base.html' %}
 {% block content%}
 <form method="POST">
     {% csrf_token  %}
-<h1>{{object.user}}</h1>
-<h1>{{object.title}}</h1>
-<h1>{{object.content}}</h1>
-<h1>{{object.created}}</h1>
-<h1>{{object.publish}}</h1>
-<a href="{% url 'core:delete' object.pk %}"><h1>Delete?</h1></a>
-<a href="{% url 'core:update' object.pk %}"><h1>Update?</h1></a>
+    <div class="container shadow bg-secondary text-light" style="max-width: 70rem;">
+    <figure>
+        <blockquote class="blockquote">
+            <cite title="Source Title pb-1"><h2 class="py-3">{{object.title}}</h2></cite>
+            <p>{{object.content}}</p>
+            <h5>Published: {{object.publish}}</h5>
+            <h6>{{object.created}}</h6>
+        </blockquote>
+        <h3 class="my-4"><figcaption class="blockquote-footer">
+            {{object.user}}
+        </figcaption></h3>
+    </figure>
+    <a href="{% url 'core:delete' object.pk %}" class="btn btn-danger mb-2"><h5>Delete</h5></a>
+    <a href="{% url 'core:update' object.pk %}" class="btn btn-primary mb-2"><h5>Update</h5></a>
 </form>
+</div>
 {% endblock %}
+
+
