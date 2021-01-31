@@ -20,16 +20,26 @@ class HomeListView(ListView):
         return Post.objects.filter(publish=True)
     
 
-class UserListView(ListView):
+class MyProfileView(LoginRequiredMixin, ListView):
     
     model = Post
-    template_name = "core/user.html"
+    template_name = "core/my_profile.html"
     
     def get_queryset(self):
-        return Post.objects.filter(publish=True)
-
+        return Post.objects.filter(user=self.request.user)
     
-class CreatePostView(CreateView):
+class OtherUserProfileView(LoginRequiredMixin, ListView):
+    
+    model = Post
+    template_name = "core/otheruser.html"
+    
+    def get_queryset(self):
+        queryset = super(OtherUserProfileView, self).get_queryset()
+        queryset = queryset.filter(pk=self.user.id)
+        return queryset
+    
+    
+class CreatePostView(LoginRequiredMixin, CreateView):
     
     model = Post
     template_name = "core/create.html"
@@ -41,7 +51,7 @@ class CreatePostView(CreateView):
         return super(CreatePostView, self).form_valid(form)
     
     
-class DetailPostView(DetailView):
+class DetailPostView(LoginRequiredMixin, DetailView):
     
     model = Post
     template_name = "core/detail.html"

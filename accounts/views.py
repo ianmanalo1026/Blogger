@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from accounts.forms import UserRegisterForm, UserSigninForm
 from django.contrib.auth import login, logout, authenticate
 from django.views.generic.edit import FormView
+from django.contrib import messages
 from django.views.generic import (CreateView, 
                                   DetailView, 
                                   DeleteView,
@@ -18,6 +19,7 @@ class CreateUserView(CreateView):
 
 class SignInUserView(FormView):
     form_class = UserSigninForm
+    success_url = '/'
     template_name = "accounts/signin.html"
     
     def post(self, request):
@@ -28,14 +30,12 @@ class SignInUserView(FormView):
         if user is not None:
             if user.is_active:
                 login(request, user)
-
-                return render(request, 'core/home.html')
-
+                return redirect(self.success_url)
+            else:
+                message = messages.warning(request, 'Invalid credential')
+                return render(request, self.template_name, {"form":self.form_class,"message":message})
+                
     
-        def form_valid(self, form):
-            return super().form_valid(form)
-            
-        
     
 class SignOutView(TemplateView):
     template_name = "accounts/signout.html"
@@ -48,3 +48,6 @@ class SignOutView(TemplateView):
     
 class ProfileUserView(TemplateView):
     pass
+
+
+

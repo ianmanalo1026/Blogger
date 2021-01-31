@@ -1,7 +1,20 @@
+{% extends 'core/base.html' %}
 {% block content%}
-<form method="POST">
-{% csrf_token %}
-{{ form.as_p}}
-<button type="submit">Submit</button>
-</form>
+{% if messages %}
+<ul class="messages">
+    {% for msg in message %}
+    <li {% if msg.tags %} class="{{ msg.tags }}"{% endif %}>{{ msg }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="container">
+    <div class="form-control w-50 mx-auto">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+
+</div>
 {% endblock %}
