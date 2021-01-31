@@ -29,13 +29,13 @@ class MyProfileView(LoginRequiredMixin, ListView):
         return Post.objects.filter(user=self.request.user)
     
 class OtherUserProfileView(LoginRequiredMixin, ListView):
-    
+
     model = Post
     template_name = "core/otheruser.html"
-    
+
     def get_queryset(self):
-        queryset = super(OtherUserProfileView, self).get_queryset()
-        queryset = queryset.filter(pk=self.user.id)
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user_id=self.kwargs['user_id'])
         return queryset
     
     
