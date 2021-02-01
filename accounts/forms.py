@@ -36,3 +36,20 @@ class UserSigninForm(AuthenticationForm):
                     "username",
                     "password"
                  ]
+        
+
+class EditUserForm(forms.ModelForm):
+    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    first_name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    last_name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    
+    class Meta:
+        model = User
+        fields = ("email", "first_name", "last_name")
+        
+class EditProfileForm(forms.ModelForm):
+    photo = forms.ImageField()
+    
+    class Meta:
+        model = Profile
+        fields = ("photo",)
