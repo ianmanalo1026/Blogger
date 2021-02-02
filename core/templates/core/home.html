@@ -8,7 +8,7 @@
         <div class="card-body">
         <p class="card-text text-light">{{item.content}}</p>
         <h6 class="card-title text-light"><a class="text-light" href="{% url 'core:detail' item.pk %}">Full Page</a></h6>
-        <p class="card-text text-light"><a class="text-light " href="">{{item.user}}</a><small class="text-light"> {{item.created}} </small></p>
+        <p class="card-text text-light"><a class="text-light " href="{% url 'core:profile' user_id=view.kwargs.user_id %}">{{item.user}}</a><small class="text-light"> {{item.created}} </small></p>
         </div>
     </div>
 </div>
